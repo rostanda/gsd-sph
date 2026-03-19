@@ -138,6 +138,10 @@ def test_defaults(tmp_path, open_mode):
             numpy.array([[0, 0, 0], [0, 0, 0]], dtype=numpy.float32),
         )
         numpy.testing.assert_array_equal(
+            s.particles.auxiliary5,
+            numpy.array([[0, 0, 0], [0, 0, 0]], dtype=numpy.float32),
+        )
+        numpy.testing.assert_array_equal(
             s.particles.image, numpy.array([[0, 0, 0], [0, 0, 0]], dtype=numpy.int32)
         )
 
@@ -197,6 +201,7 @@ def make_nondefault_frame():
     frame0.particles.auxiliary2 = [[1, 0, 0], [0, 1, 0]]
     frame0.particles.auxiliary3 = [[0, 1, 0], [0, 0, 1]]
     frame0.particles.auxiliary4 = [[-1, 0, 0], [0, -1, 0]]
+    frame0.particles.auxiliary5 = [[0, 0, 1], [1, 0, 0]]
     frame0.particles.image = [[10, 20, 30], [5, 6, 7]]
 
     frame0.bonds.N = 1
@@ -243,6 +248,7 @@ def assert_frames_equal(s, frame0, check_position=True, check_step=True):
     numpy.testing.assert_array_equal(s.particles.auxiliary2, frame0.particles.auxiliary2)
     numpy.testing.assert_array_equal(s.particles.auxiliary3, frame0.particles.auxiliary3)
     numpy.testing.assert_array_equal(s.particles.auxiliary4, frame0.particles.auxiliary4)
+    numpy.testing.assert_array_equal(s.particles.auxiliary5, frame0.particles.auxiliary5)
     numpy.testing.assert_array_equal(s.particles.image, frame0.particles.image)
 
     assert s.bonds.N == frame0.bonds.N
@@ -355,6 +361,10 @@ def test_fallback(tmp_path, open_mode):
             numpy.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]], dtype=numpy.float32),
         )
         numpy.testing.assert_array_equal(
+            s.particles.auxiliary5,
+            numpy.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]], dtype=numpy.float32),
+        )
+        numpy.testing.assert_array_equal(
             s.particles.image,
             numpy.array([[0, 0, 0], [0, 0, 0], [0, 0, 0]], dtype=numpy.int32),
         )
@@ -442,6 +452,7 @@ def test_no_fallback(tmp_path, open_mode):
     frame1.particles.auxiliary2 = [[0, 0, 0]] * frame0.particles.N
     frame1.particles.auxiliary3 = [[0, 0, 0]] * frame0.particles.N
     frame1.particles.auxiliary4 = [[0, 0, 0]] * frame0.particles.N
+    frame1.particles.auxiliary5 = [[0, 0, 0]] * frame0.particles.N
     frame1.particles.image = [[0, 0, 0]] * frame0.particles.N
 
     frame1.bonds.N = frame0.bonds.N
@@ -871,6 +882,8 @@ def test_initial_frame_copy(tmp_path, open_mode):
         assert not frame_1.particles.auxiliary3.flags.writeable
         assert frame_1.particles.auxiliary4 is initial.particles.auxiliary4
         assert not frame_1.particles.auxiliary4.flags.writeable
+        assert frame_1.particles.auxiliary5 is initial.particles.auxiliary5
+        assert not frame_1.particles.auxiliary5.flags.writeable
         assert frame_1.particles.image is initial.particles.image
         assert not frame_1.particles.image.flags.writeable
 
