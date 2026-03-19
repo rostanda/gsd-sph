@@ -3,7 +3,7 @@
 [![Build and Test](https://github.com/rostanda/gsd-sph/actions/workflows/build.yml/badge.svg)](https://github.com/rostanda/gsd-sph/actions/workflows/build.yml)
 [![Release V1.0](https://img.shields.io/badge/release-V1.0-blue)](https://github.com/rostanda/gsd-sph/releases/tag/v1.0)
 
-**Note:** This is a forked and modified version of [krachdd/gsd-sph](https://github.com/krachdd/gsd-sph), adapted for hoomd-sph3 for non-Newtonian fluid flow and Fluid-Solid-Interactions [rostanda/hoomd-sph3_nnfsi](https://github.com/rostanda/hoomd-sph3_nnfs) with an additional 5th Auxiliary particle field. Modifications primarily affect the Python API (`gsd/hoomd.py`) and include optional SPH-specific fields.
+**Note:** This is a forked and modified version of [krachdd/gsd-sph](https://github.com/krachdd/gsd-sph), adapted for hoomd-sph3 for non-Newtonian fluid flow and Fluid-Solid-Interactions [rostanda/hoomd-sph3_nnfsi](https://github.com/rostanda/hoomd-sph3_nnfsi) with an additional 5th Auxiliary particle field. Modifications primarily affect the Python API (`gsd/hoomd.py`) and include optional SPH-specific fields.
 
 **Version:** 3.4.2 (based on [GSD by Glotzer Group](https://github.com/glotzerlab/gsd))
 
