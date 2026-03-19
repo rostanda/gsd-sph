@@ -6,7 +6,7 @@
 :py:mod:`gsd.hoomd` reads and writes GSD files with the ``hoomd`` schema.
 This version is extended for use with the SPH solver in ``hoomd-sph3``:
 additional particle fields (``slength``, ``density``, ``pressure``, ``energy``,
-``auxiliary1``–``auxiliary4``) are added to `ParticleData`, and fields unused
+``auxiliary1``–``auxiliary5``) are added to `ParticleData`, and fields unused
 by SPH (``orientation``, ``angmom``, ``charge``, ``diameter``,
 ``moment_inertia``) are removed from the schema defaults.
 
@@ -172,6 +172,9 @@ class ParticleData:
         auxiliary4 ((*N*, 3) `numpy.ndarray` of ``numpy.float32``):
             Auxiliary vector field 4 (:chunk:`particles/auxiliary4`).
 
+        auxiliary5 ((*N*, 3) `numpy.ndarray` of ``numpy.float32``):
+            Auxiliary vector field 5 (:chunk:`particles/auxiliary5`).
+
         image ((*N*, 3) `numpy.ndarray` of ``numpy.int32``):
             Particle image (:chunk:`particles/image`).
 
@@ -195,6 +198,7 @@ class ParticleData:
     _default_value['auxiliary2'] = numpy.array([0, 0, 0], dtype=numpy.float32)
     _default_value['auxiliary3'] = numpy.array([0, 0, 0], dtype=numpy.float32)
     _default_value['auxiliary4'] = numpy.array([0, 0, 0], dtype=numpy.float32)
+    _default_value['auxiliary5'] = numpy.array([0, 0, 0], dtype=numpy.float32)
     _default_value['image'] = numpy.array([0, 0, 0], dtype=numpy.int32)
     _default_value['type_shapes'] = [{}]
 
@@ -214,6 +218,7 @@ class ParticleData:
         self.auxiliary2 = None
         self.auxiliary3 = None
         self.auxiliary4 = None
+        self.auxiliary5 = None
         self.image = None
         self.type_shapes = None
 
@@ -274,6 +279,9 @@ class ParticleData:
         if self.auxiliary4 is not None:
             self.auxiliary4 = numpy.ascontiguousarray(self.auxiliary4, dtype=numpy.float32)
             self.auxiliary4 = self.auxiliary4.reshape([self.N, 3])
+        if self.auxiliary5 is not None:
+            self.auxiliary5 = numpy.ascontiguousarray(self.auxiliary5, dtype=numpy.float32)
+            self.auxiliary5 = self.auxiliary5.reshape([self.N, 3])
 
         if self.image is not None:
             self.image = numpy.ascontiguousarray(self.image, dtype=numpy.int32)
